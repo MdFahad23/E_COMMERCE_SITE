@@ -6,6 +6,7 @@ const app = express();
 const error = require("./middlewares/error");
 
 const userRouter = require("./routers/userRouter");
+const categoryRouter = require("./routers/categoryRouter");
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -15,6 +16,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use("/api/user", userRouter);
+app.use("/api/category", categoryRouter);
 
 app.use(error);
 
