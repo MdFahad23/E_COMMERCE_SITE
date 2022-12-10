@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/**
+COMPONENTS LAYER
+**/
+
+@layer components {
+  /* Container */
+  .containers {
+    @apply md:container md:mx-auto px-[15px];
+  }
+}
+
+/**
+UTILITIES LAYER
+**/
+
+@layer utilities {
+}
+
+/**
+CSS STYLE
+**/
+
+nav a.active {
+  color: #ff9900;
+}
