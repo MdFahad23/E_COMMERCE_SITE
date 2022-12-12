@@ -11,6 +11,10 @@ COMPONENTS LAYER
   .containers {
     @apply md:container md:mx-auto px-[15px];
   }
+  /* MESSAGE */
+  .message {
+    @apply w-[800px] ml-4 p-3 rounded-[7px] bg-slate-500 text-slate-300 text-justify text-xl font-sans font-semibold;
+  }
 }
 
 /**

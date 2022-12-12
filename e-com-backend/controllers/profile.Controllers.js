@@ -9,7 +9,7 @@ module.exports.getProfile = async (req, res) => {
 
 module.exports.setProfile = async (req, res) => {
   let userId = req.user._id;
-  const userProfile = _.pick(req.body, [
+  let userProfile = _.pick(req.body, [
     "phone",
     "address1",
     "address2",
