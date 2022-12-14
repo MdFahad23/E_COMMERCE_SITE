@@ -15,6 +15,16 @@ COMPONENTS LAYER
   .message {
     @apply w-[800px] ml-4 p-3 rounded-[7px] bg-slate-500 text-slate-300 text-justify text-xl font-sans font-semibold;
   }
+  /* Dashboard */
+  .card_Link {
+    @apply col-span-3 mr-8 border-2 border-[#999];
+  }
+  .card_Info {
+    @apply col-span-9 mr-8;
+  }
+  .history {
+    @apply text-[24px] font-sans font-semibold pl-3 py-3;
+  }
 }
 
 /**
