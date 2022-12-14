@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../Components/Layout";
 import { showError, showLoading } from "../util/messages";
 import { login } from "../api/apiAuth";
+import { authentication } from "../util/auth";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -34,7 +35,7 @@ const Login = () => {
 
     login({ email, password })
       .then((response) => {
-        if (response) {
+        authentication(response.data.token, () => {
           setValues({
             name: "",
             email: "",
@@ -43,7 +44,7 @@ const Login = () => {
             disable: false,
             redirect: true,
           });
-        }
+        });
       })
       .catch((err) => {
         let errMsg = "Something Wend Wrong! ";
