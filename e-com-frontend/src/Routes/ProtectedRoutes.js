@@ -1,12 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const Protected = ({ auth, children }) => {
-  const navigate = useNavigate();
-  if (!auth) {
-    return navigate("/login");
-  } else {
-    return children;
-  }
+import { isAuthentication } from "../util/auth";
+
+const Protected = ({ children }) => {
+  const auth = isAuthentication();
+
+  return auth ? children : <Navigate to="/login" />;
 };
 
 export default Protected;

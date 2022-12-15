@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 
 import Layout from "../Components/Layout";
 import { showError, showLoading } from "../util/messages";
 import { register } from "../api/apiAuth";
+import { isAuthentication } from "../util/auth";
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -120,6 +121,7 @@ const Register = () => {
   return (
     <Layout title="Register" className="bg-slate-400 py-6">
       <div className="containers">
+        {isAuthentication() ? <Navigate to="/" /> : ""}
         {showSuccess()}
         {showLoading(loading)}
         {showError(error, error)}

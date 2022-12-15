@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { signOut, isAuthentication } from "../util/auth";
+import { signOut, isAuthentication, userInfo } from "../util/auth";
 
 const Menu = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const Menu = () => {
         {isAuthentication() && (
           <>
             <li className="mx-10">
-              <NavLink className="text-xl" to="/dashboard">
+              <NavLink className="text-xl" to={`/${userInfo().role}/dashboard`}>
                 Dashboard
               </NavLink>
             </li>

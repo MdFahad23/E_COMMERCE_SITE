@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import Layout from "../Components/Layout";
 import { showError, showLoading } from "../util/messages";
 import { login } from "../api/apiAuth";
-import { authentication } from "../util/auth";
+import { authentication, isAuthentication, userInfo } from "../util/auth";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -15,8 +15,6 @@ const Login = () => {
     disable: false,
     redirect: false,
   });
-
-  const navigate = useNavigate();
 
   const { email, password, error, loading, disable, redirect } = values;
 
@@ -97,8 +95,10 @@ const Login = () => {
     </form>
   );
 
+  const navigate = useNavigate();
   const redirectUser = () => {
-    if (redirect) return navigate("/");
+    if (redirect) return navigate(`/${userInfo().role}/dashboard`);
+    if (isAuthentication()) return <Navigate to="/" />;
   };
 
   return (
