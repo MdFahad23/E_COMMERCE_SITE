@@ -15,7 +15,7 @@ const AdminDashboard = () => {
         </h4>
         <ul>
           <li className="history text-[#0069f3] border-b-2 border-b-[#999]">
-            <NavLink to="#">Create Category</NavLink>
+            <NavLink to="/create/category">Create Category</NavLink>
           </li>
           <li className=" text-[#0069f3] history border-b-2 border-[#999]">
             <NavLink to="#">Create Product</NavLink>

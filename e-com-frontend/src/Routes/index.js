@@ -9,6 +9,7 @@ import Dashboard from "../pages/Dashboard";
 import AdminRoutes from "./adminRoutes";
 import AdminDashboard from "../pages/adminDashboard";
 import Error from "../Components/Error";
+import CreateCategory from "../Components/CreateCategory";
 
 const Index = () => {
   return (
@@ -29,6 +30,14 @@ const Index = () => {
         element={
           <AdminRoutes>
             <AdminDashboard />
+          </AdminRoutes>
+        }
+      />
+      <Route
+        path="/create/category"
+        element={
+          <AdminRoutes>
+            <CreateCategory />
           </AdminRoutes>
         }
       />
