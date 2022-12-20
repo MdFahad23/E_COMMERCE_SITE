@@ -18,7 +18,7 @@ const AdminDashboard = () => {
             <NavLink to="/create/category">Create Category</NavLink>
           </li>
           <li className=" text-[#0069f3] history border-b-2 border-[#999]">
-            <NavLink to="#">Create Product</NavLink>
+            <NavLink to="/create/product">Create Product</NavLink>
           </li>
         </ul>
       </>

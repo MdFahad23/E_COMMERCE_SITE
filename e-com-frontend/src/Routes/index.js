@@ -9,7 +9,8 @@ import Dashboard from "../pages/Dashboard";
 import AdminRoutes from "./adminRoutes";
 import AdminDashboard from "../pages/adminDashboard";
 import Error from "../Components/Error";
-import CreateCategory from "../Components/CreateCategory";
+import CreateCategory from "../Components/admin/CreateCategory";
+import CreateProduct from "../Components/admin/CreateProduct";
 
 const Index = () => {
   return (
@@ -38,6 +39,14 @@ const Index = () => {
         element={
           <AdminRoutes>
             <CreateCategory />
+          </AdminRoutes>
+        }
+      />
+      <Route
+        path="/create/product"
+        element={
+          <AdminRoutes>
+            <CreateProduct />
           </AdminRoutes>
         }
       />

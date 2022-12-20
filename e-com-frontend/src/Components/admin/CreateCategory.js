@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Layout from "../Components/Layout";
-import { showSuccess, showError, showLoading } from "../util/messages";
-import { createCategory } from "../api/adminApi";
-import { userInfo } from "../util/auth";
+import Layout from "../Layout";
+import { showSuccess, showError, showLoading } from "../../util/messages";
+import { createCategory } from "../../api/adminApi";
+import { userInfo } from "../../util/auth";
 
 const CreateCategory = () => {
   const [values, setValues] = useState({
