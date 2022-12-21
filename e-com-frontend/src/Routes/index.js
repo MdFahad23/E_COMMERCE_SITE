@@ -11,6 +11,7 @@ import AdminDashboard from "../pages/adminDashboard";
 import Error from "../Components/Error";
 import CreateCategory from "../Components/admin/CreateCategory";
 import CreateProduct from "../Components/admin/CreateProduct";
+import ProductDetails from "../Components/Products/ProductDetails";
 
 const Index = () => {
   return (
@@ -50,6 +51,7 @@ const Index = () => {
           </AdminRoutes>
         }
       />
+      <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="*" element={<Error />} />
     </Routes>
   );

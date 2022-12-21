@@ -8,7 +8,6 @@ import { userInfo } from "../../util/auth";
 
 const CreateProduct = () => {
   const [values, setValues] = useState({
-    photo: "",
     name: "",
     description: "",
     price: "",
@@ -23,7 +22,6 @@ const CreateProduct = () => {
   });
 
   const {
-    photo,
     name,
     description,
     price,
@@ -43,44 +41,45 @@ const CreateProduct = () => {
         setValues({
           ...values,
           categories: response.data,
+          formData: new FormData(),
         });
       })
-      .catch((err) => {
+      .catch((error) => {
         setValues({
           ...values,
           error: "Failed to load categories!",
+          formData: new FormData(),
         });
       });
   }, []);
 
   const handleChange = (e) => {
-    let formData = new FormData();
-
-    let value = e.target.name === "photo" ? e.target.files[0] : e.target.value;
-
+    const value =
+      e.target.name === "photo" ? e.target.files[0] : e.target.value;
     formData.set(e.target.name, value);
-
     setValues({
       ...values,
       [e.target.name]: value,
       error: false,
+      success: false,
     });
+    console.log(...formData);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setValues({
       ...values,
+      error: false,
       loading: true,
       disabled: true,
+      success: false,
     });
-
-    console.log(...formData);
-
-    let { jwt } = userInfo();
+    const { jwt } = userInfo();
     createProduct(jwt, formData)
-      .then((res) => {
+      .then((response) => {
         setValues({
+          ...values,
           name: "",
           description: "",
           price: "",
@@ -89,17 +88,18 @@ const CreateProduct = () => {
           loading: false,
           disabled: false,
           success: true,
+          error: false,
         });
       })
-      .catch((err) => {
-        let errMsg = "Something Went Wrong!";
-        if (err.response) errMsg = err.response.data;
+      .catch((error) => {
+        let errMsg = "Something went wrong!";
+        if (error.response) errMsg = error.response.data;
         setValues({
           ...values,
           error: errMsg,
+          loading: false,
           success: false,
           disabled: false,
-          loading: false,
         });
       });
   };
