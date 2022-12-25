@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import Layout from "../Layout";
 import { API } from "../../util/config";
 import { isAuthentication, userInfo } from "../../util/auth";
-import { addToCart } from "../../api/CartApi";
+import { addToCart } from "../../api/apiOrder";
 import { showError, showSuccess } from "../../util/messages";
 
 const ProductDetails = () => {

@@ -13,6 +13,8 @@ import CreateCategory from "../Components/admin/CreateCategory";
 import CreateProduct from "../Components/admin/CreateProduct";
 import ProductDetails from "../Components/Products/ProductDetails";
 import Cart from "../Components/order/Cart";
+import ShippingAddress from "../Components/order/ShippingAddress";
+import Checkout from "../Components/order/Checkout";
 
 const Index = () => {
   return (
@@ -34,6 +36,22 @@ const Index = () => {
         element={
           <Protected>
             <Cart />
+          </Protected>
+        }
+      />
+      <Route
+        path="/shipping"
+        element={
+          <Protected>
+            <ShippingAddress />
+          </Protected>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <Protected>
+            <Checkout />
           </Protected>
         }
       />

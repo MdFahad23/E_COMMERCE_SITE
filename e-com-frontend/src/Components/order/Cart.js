@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Layout from "../Layout";
-import { getCartItem, updateCartItem, delateCartItem } from "../../api/CartApi";
+import {
+  getCartItem,
+  updateCartItem,
+  delateCartItem,
+} from "../../api/apiOrder";
 import { userInfo } from "../../util/auth";
 import CartItem from "./CartItem";
 

@@ -12,7 +12,7 @@ import CheckBox from "../Components/Products/CheckBox";
 import RadioBox from "../Components/Products/RadioBox";
 import { prices } from "../util/price";
 import { isAuthentication, userInfo } from "../util/auth";
-import { addToCart } from "../api/CartApi";
+import { addToCart } from "../api/apiOrder";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
