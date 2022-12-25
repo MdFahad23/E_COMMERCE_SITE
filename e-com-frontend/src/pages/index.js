@@ -11,6 +11,8 @@ import Card from "../Components/Products/Card";
 import CheckBox from "../Components/Products/CheckBox";
 import RadioBox from "../Components/Products/RadioBox";
 import { prices } from "../util/price";
+import { isAuthentication, userInfo } from "../util/auth";
+import { addToCart } from "../api/CartApi";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -66,6 +68,30 @@ const Home = () => {
       );
   };
 
+  const handleAddToCart = (product) => () => {
+    if (isAuthentication()) {
+      setValues({ ...values, error: false, success: false });
+      const { jwt, _id } = userInfo();
+      const cartItem = {
+        user: _id,
+        product: product._id,
+        price: product.price,
+      };
+
+      addToCart(jwt, cartItem)
+        .then((res) => setValues({ ...values, success: true }))
+        .catch((err) => {
+          if (err.response) {
+            setValues({ ...values, error: err.response.data });
+          } else {
+            setValues({ ...values, error: "Adding to cart Field!" });
+          }
+        });
+    } else {
+      setValues({ ...values, success: false, error: "please login First!" });
+    }
+  };
+
   return (
     <Layout title="Home Page">
       <div className="containers">
@@ -104,7 +130,11 @@ const Home = () => {
         <div className="grid grid-cols-12 mt-14">
           {products &&
             products.map((product) => (
-              <Card product={product} key={product._id} />
+              <Card
+                product={product}
+                key={product._id}
+                handleAddToCart={handleAddToCart(product)}
+              />
             ))}
         </div>
       </div>

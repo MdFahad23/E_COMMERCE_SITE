@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { API } from "../../util/config";
 
-const Card = ({ product }) => {
+const Card = ({ product, handleAddToCart }) => {
   return (
     <div className="col-span-3 border-2 mx-6 my-6">
       <img
@@ -29,7 +29,10 @@ const Card = ({ product }) => {
         {product.quantity ? (
           <>
             &nbsp;
-            <button className="btn btn-outline-primary btn-sm">
+            <button
+              className="btn btn-outline-primary btn-sm"
+              onClick={handleAddToCart}
+            >
               Add to Cart
             </button>
           </>

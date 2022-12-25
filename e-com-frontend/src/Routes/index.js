@@ -12,6 +12,7 @@ import Error from "../Components/Error";
 import CreateCategory from "../Components/admin/CreateCategory";
 import CreateProduct from "../Components/admin/CreateProduct";
 import ProductDetails from "../Components/Products/ProductDetails";
+import Cart from "../Components/order/Cart";
 
 const Index = () => {
   return (
@@ -24,6 +25,15 @@ const Index = () => {
         element={
           <Protected>
             <Dashboard />
+          </Protected>
+        }
+      />
+
+      <Route
+        path="/cart"
+        element={
+          <Protected>
+            <Cart />
           </Protected>
         }
       />

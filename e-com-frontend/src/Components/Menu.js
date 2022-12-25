@@ -36,6 +36,11 @@ const Menu = () => {
               </NavLink>
             </li>
             <li className="mx-10">
+              <NavLink className="text-xl" to="/cart">
+                Cart
+              </NavLink>
+            </li>
+            <li className="mx-10">
               <span
                 className="text-xl cursor-pointer"
                 onClick={() => {

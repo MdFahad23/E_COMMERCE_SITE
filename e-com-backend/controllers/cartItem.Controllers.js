@@ -30,7 +30,7 @@ module.exports.createCartItem = async (req, res) => {
  * @param {*} res
  */
 module.exports.getCartItem = async (req, res) => {
-  let cartItem = await CartItem.findOne({ user: req.user._id })
+  let cartItem = await CartItem.find({ user: req.user._id })
     .populate("product", "name")
     .populate("user", "name");
 
