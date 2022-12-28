@@ -15,6 +15,7 @@ import ProductDetails from "../Components/Products/ProductDetails";
 import Cart from "../Components/order/Cart";
 import ShippingAddress from "../Components/order/ShippingAddress";
 import Checkout from "../Components/order/Checkout";
+import Payment from "../Components/order/Payment";
 
 const Index = () => {
   return (
@@ -52,6 +53,14 @@ const Index = () => {
         element={
           <Protected>
             <Checkout />
+          </Protected>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <Protected>
+            <Payment />
           </Protected>
         }
       />
