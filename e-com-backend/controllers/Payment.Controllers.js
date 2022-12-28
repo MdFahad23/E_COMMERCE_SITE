@@ -1,7 +1,11 @@
 require("dotenv").config();
-const PaymentSession = require("ssl-commerz-node").PaymentSession;
+const SSLCommerzPayment = require("sslcommerz-lts");
 const { CartItem } = require("../models/cartItem");
 const { Profile } = require("../models/profile");
+
+let STORE_ID = process.env.STORE_ID;
+let STORE_PASSWORD = process.env.STORE_PASSWORD;
+let IS_LIVE = false;
 
 module.exports.initPayment = async (req, res) => {
   const userId = req.user._id;
@@ -21,62 +25,40 @@ module.exports.initPayment = async (req, res) => {
     .map((item) => item.count)
     .reduce((a, b) => a + b, 0);
 
-  let payment = new PaymentSession(
-    true,
-    process.env.STORE_ID,
-    process.env.STORE_PASSWORD
-  );
-
-  // Set the urls
-  payment.setUrls({
-    success: "yoursite.com/success", // If payment Succeed
-    fail: "yoursite.com/fail", // If payment failed
-    cancel: "yoursite.com/cancel", // If user cancel payment
-    ipn: "yoursite.com/ipn", // SSLCommerz will send http post request in this link
-  });
-
-  // Set order details
-  payment.setOrderInfo({
-    total_amount: total_amount, // Number field
-    currency: "BDT", // Must be three character string
-    tran_id: tran_id, // Unique Transaction id
-    emi_option: 0, // 1 or 0
-  });
-
-  // Set customer info
-  payment.setCusInfo({
-    name: req.user.name,
-    email: req.user.email,
-    add1: address1,
-    add2: address2,
-    city: city,
-    state: state,
-    postcode: postCode,
-    country: country,
-    phone: phone,
-    fax: phone,
-  });
-
-  // Set shipping info
-  payment.setShippingInfo({
-    method: "Courier", //Shipping method of the order. Example: YES or NO or Courier
-    num_item: num_item,
-    name: req.user.name,
-    add1: address1,
-    add2: address2,
-    city: city,
-    state: state,
-    postcode: postCode,
-    country: country,
-  });
-
-  // Set Product Profile
-  payment.setProductInfo({
-    product_name: "Computer",
+  const data = {
+    total_amount: total_amount,
+    currency: "BDT",
+    tran_id: tran_id, // use unique tran_id for each api call
+    success_url: "http://localhost:3030/success",
+    fail_url: "http://localhost:3030/fail",
+    cancel_url: "http://localhost:3030/cancel",
+    ipn_url: "http://localhost:3030/ipn",
+    shipping_method: "Courier",
+    product_name: "Computer.",
     product_category: "General",
     product_profile: "general",
+    cus_name: req.user.name,
+    cus_email: req.user.email,
+    cus_add1: address1,
+    cus_add2: address2,
+    cus_city: city,
+    cus_state: state,
+    cus_postcode: postCode,
+    cus_country: country,
+    cus_phone: phone,
+    cus_fax: phone,
+    ship_name: req.user.name,
+    ship_add1: address1,
+    ship_add2: address2,
+    ship_city: city,
+    ship_state: state,
+    ship_postcode: postCode,
+    ship_country: country,
+  };
+  const sslcz = new SSLCommerzPayment(STORE_ID, STORE_PASSWORD, IS_LIVE);
+  sslcz.init(data).then((apiResponse) => {
+    // Redirect the user to payment gateway
+    let GatewayPageURL = apiResponse.GatewayPageURL;
+    res.redirect(GatewayPageURL);
   });
-
-  let data = await payment.paymentInit();
-  return res.status(200).send(data);
 };
